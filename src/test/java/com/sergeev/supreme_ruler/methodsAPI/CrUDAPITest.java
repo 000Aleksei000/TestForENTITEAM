@@ -52,15 +52,17 @@ class CrUDAPITest {
 
     @Test
     void lordSetPlanet() {
-        Lord lord = new Lord("Lanister", 44L);
-        Planet planet = new Planet("Westeros");
-        crUDAPI.addPlanet(planet);
-        crUDAPI.addLord(lord);
-        Long idLord = lordRepository.findByName(lord.getName()).get(0).getId();
-        crUDAPI.lordSetPlanet(idLord, planet.getName());
-        Planet planet1 = planetRepository.findByName(planet.getName()).get(0);
-        assertEquals(idLord, planet1.getLord().getId());
+          Lord lord = new Lord("Lanister", 44L);
+          Planet planet = new Planet("Westeros");
+          crUDAPI.addPlanet(planet);
+          crUDAPI.addLord(lord);
+          Long idLord = lordRepository.findByName(lord.getName()).get(0).getId();
+          crUDAPI.lordSetPlanet(idLord, planet.getName());
+          Planet planet1 = planetRepository.findByName(planet.getName()).get(0);
+          assertEquals(idLord, planet1.getLord().getId());
 
+          Lord lord1 = lordRepository.findByName(lord.getName()).get(0);
+          assertFalse(lord1.getPlanetSet().isEmpty());
     }
 
     @Test
@@ -83,7 +85,7 @@ class CrUDAPITest {
             crUDAPI.addLord(lord);
         }
         List<Lord> allUnemployedLord = crUDAPI.getAllUnemployedLord();
-        assertTrue(allUnemployedLord.size() == 26);
+        assertEquals(allUnemployedLord.size(), 26);
     }
 
     @Test

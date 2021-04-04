@@ -41,7 +41,8 @@ public class CrUDAPI {
         List<Planet> planets = planetRepository.findByName(planetName);
         for (Planet planet : planets) {
             planet.setLord(lord);
-            planetRepository.save(planet);
+            lordRepository.save(lord);
+            //planetRepository.save(planet);
         }
     }
 

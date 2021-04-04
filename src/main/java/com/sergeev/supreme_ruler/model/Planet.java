@@ -1,6 +1,9 @@
 package com.sergeev.supreme_ruler.model;
 
 
+import org.hibernate.annotations.Fetch;
+import org.springframework.data.repository.cdi.Eager;
+
 import javax.persistence.*;
 import java.util.Objects;
 
