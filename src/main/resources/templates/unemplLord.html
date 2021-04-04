@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Future</title>
+</head>
+<body>
+<h2>Список бездельников:</h2>
+<a>Id : Имя : Возраст</a>
+<br>
+<tr th:each="lord : ${Lords}">
+    <td><span th:text="${lord.getId()}"> Id </span></td>:
+    <td><span th:text="${lord.getName()}"> Name </span></td>:
+    <td><span th:text="${lord.getAge()}"> Age </span></td>
+    <br>
+</tr>
+</form>
+</body>
+</html>

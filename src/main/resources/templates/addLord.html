@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Future</title>
+</head>
+<body>
+<h2>Добавить повелителя:</h2>
+<form method="post" action="/addLord">
+    <input th:type="text" name="Name"> Имя повелителя <br>
+    <input th:type="number" name="Age"> Возраст повелителя <br>
+    <input th:type="submit" name="Submit"><br>
+</form>
+</body>
+</html>

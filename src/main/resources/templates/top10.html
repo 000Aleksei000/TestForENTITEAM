@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Future</title>
+</head>
+<body>
+<h2>Топ-10 самых молодых повелителей:</h2>
+<a>Id : name : age</a>
+<br>
+<tr th:each="lord : ${Top10Lords}">
+    <td><span th:text="${lord.getId()}"> Id </span></td>:
+    <td><span th:text="${lord.getName()}"> Name </span></td>:
+    <td><span th:text="${lord.getAge()}"> Age </span></td>
+    <br>
+</tr>
+</form>
+</body>
+</html>
