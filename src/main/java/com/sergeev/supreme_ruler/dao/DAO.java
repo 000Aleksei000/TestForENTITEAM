@@ -1,7 +1,7 @@
-package com.sergeev.supreme_ruler.methodsAPI;
+package com.sergeev.supreme_ruler.dao;
 
-import com.sergeev.supreme_ruler.accessingdatajpa.LordRepository;
-import com.sergeev.supreme_ruler.accessingdatajpa.PlanetRepository;
+import com.sergeev.supreme_ruler.accessing.data.jpa.LordRepository;
+import com.sergeev.supreme_ruler.accessing.data.jpa.PlanetRepository;
 import com.sergeev.supreme_ruler.model.Lord;
 import com.sergeev.supreme_ruler.model.Planet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class CrUDAPI {
+public class DAO {
     @Autowired
     private LordRepository lordRepository;
 

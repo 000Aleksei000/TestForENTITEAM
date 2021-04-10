@@ -1,4 +1,4 @@
-package com.sergeev.supreme_ruler.accessingdatajpa;
+package com.sergeev.supreme_ruler.accessing.data.jpa;
 
 import com.sergeev.supreme_ruler.model.Planet;
 import org.springframework.data.repository.CrudRepository;

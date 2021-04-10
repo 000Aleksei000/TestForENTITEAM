@@ -1,6 +1,6 @@
 package com.sergeev.supreme_ruler.controller;
 
-import com.sergeev.supreme_ruler.methodsAPI.CrUDAPI;
+import com.sergeev.supreme_ruler.dao.DAO;
 import com.sergeev.supreme_ruler.model.Lord;
 import com.sergeev.supreme_ruler.model.Planet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 
 @Controller
-public class ControllerForApp {
+public class AppController {
     @Autowired
-    private CrUDAPI crUDAPI;
+    private DAO DAO;
 
     @GetMapping("/referendum")
     public String referendum() {
@@ -35,7 +34,7 @@ public class ControllerForApp {
             return "fail";
         }
         Lord lord = new Lord(name, age);
-        crUDAPI.addLord(lord);
+        DAO.addLord(lord);
         return "success";
     }
 
@@ -51,7 +50,7 @@ public class ControllerForApp {
             return "fail";
         }
         Planet planet = new Planet(planetName);
-        crUDAPI.addPlanet(planet);
+        DAO.addPlanet(planet);
         return "success";
     }
 
@@ -67,7 +66,7 @@ public class ControllerForApp {
         if (lordId < 0 || planetName == null) {
             return "fail";
         }
-        crUDAPI.lordSetPlanet(lordId, planetName);
+        DAO.lordSetPlanet(lordId, planetName);
         return "success";
     }
 
@@ -82,19 +81,19 @@ public class ControllerForApp {
         if (planetId < 0) {
             return "fail";
         }
-        crUDAPI.deletePlanet(planetId);
+        DAO.deletePlanet(planetId);
         return "success";
     }
 
     @GetMapping("/findUnemploedLord")
     public String findUnemplLord(Model model) {
-        model.addAttribute("Lords", crUDAPI.getAllUnemployedLord());
+        model.addAttribute("Lords", DAO.getAllUnemployedLord());
         return "unemplLord";
     }
 
     @GetMapping("/top-10yongest")
     public String top10(Model model) {
-        model.addAttribute("Top10Lords", crUDAPI.getTenYoungestLord());
+        model.addAttribute("Top10Lords", DAO.getTenYoungestLord());
         return "top10";
     }
 }

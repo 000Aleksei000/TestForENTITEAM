@@ -1,7 +1,7 @@
-package com.sergeev.supreme_ruler.methodsAPI;
+package com.sergeev.supreme_ruler.dao;
 
-import com.sergeev.supreme_ruler.accessingdatajpa.LordRepository;
-import com.sergeev.supreme_ruler.accessingdatajpa.PlanetRepository;
+import com.sergeev.supreme_ruler.accessing.data.jpa.LordRepository;
+import com.sergeev.supreme_ruler.accessing.data.jpa.PlanetRepository;
 import com.sergeev.supreme_ruler.model.Lord;
 import com.sergeev.supreme_ruler.model.Planet;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestPropertySource(
         locations = "classpath:application-integrationtest.properties")
-class CrUDAPITest {
+class DAOTest {
 
     @Autowired
-    CrUDAPI crUDAPI;
+    DAO DAO;
 
     @Autowired
     LordRepository lordRepository;
@@ -33,7 +33,7 @@ class CrUDAPITest {
     @Test
     void addLord() {
         Lord lord = new Lord("Gregory Cligakhghnnnnsdfasf", 4888L);
-        crUDAPI.addLord(lord);
+        DAO.addLord(lord);
         Lord lord1 = lordRepository.findByName(lord.getName()).get(0);
         assertEquals(lord.getName(), lord1.getName());
         assertEquals(lord.getId(), lord1.getId());
@@ -44,7 +44,7 @@ class CrUDAPITest {
     @Test
     void addPlanet() {
         Planet planet = new Planet("SSSR");
-        crUDAPI.addPlanet(planet);
+        DAO.addPlanet(planet);
         Planet planet1 = planetRepository.findByName(planet.getName()).get(0);
         assertEquals(planet1.getId(), planet.getId());
         assertEquals(planet1.getName(), planet.getName());
@@ -54,10 +54,10 @@ class CrUDAPITest {
     void lordSetPlanet() {
           Lord lord = new Lord("Lanister", 44L);
           Planet planet = new Planet("Westeros");
-          crUDAPI.addPlanet(planet);
-          crUDAPI.addLord(lord);
+          DAO.addPlanet(planet);
+          DAO.addLord(lord);
           Long idLord = lordRepository.findByName(lord.getName()).get(0).getId();
-          crUDAPI.lordSetPlanet(idLord, planet.getName());
+          DAO.lordSetPlanet(idLord, planet.getName());
           Planet planet1 = planetRepository.findByName(planet.getName()).get(0);
           assertEquals(idLord, planet1.getLord().getId());
 
@@ -68,8 +68,8 @@ class CrUDAPITest {
     @Test
     void deletePlanet() {
         Planet planet = new Planet("Jupiter");
-        crUDAPI.addPlanet(planet);
-        crUDAPI.deletePlanet(planet.getId());
+        DAO.addPlanet(planet);
+        DAO.deletePlanet(planet.getId());
         Optional<Planet> byId = planetRepository.findById(planet.getId());
         assertTrue(byId.isEmpty());
     }
@@ -82,18 +82,18 @@ class CrUDAPITest {
             planets.get(i).setLord(lords.get(i));
         }
         for (Lord lord : lords) {
-            crUDAPI.addLord(lord);
+            DAO.addLord(lord);
         }
-        List<Lord> allUnemployedLord = crUDAPI.getAllUnemployedLord();
+        List<Lord> allUnemployedLord = DAO.getAllUnemployedLord();
         assertEquals(allUnemployedLord.size(), 26);
     }
 
     @Test
     void getTenYoungestLord() {
         for (int i = 0; i < 10; i++) {
-            crUDAPI.addLord(new Lord("Yongest" + i, 0L));
+            DAO.addLord(new Lord("Yongest" + i, 0L));
         }
-        List<Lord> tenYoungestLord = crUDAPI.getTenYoungestLord();
+        List<Lord> tenYoungestLord = DAO.getTenYoungestLord();
         for (Lord lord : tenYoungestLord) {
             assertTrue(lord.getAge() == 0);
         }
