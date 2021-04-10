@@ -81,7 +81,6 @@ public class DAO {
                 if(i==10){
                     break;
                 }
-                System.out.println(age);
                 List<Lord> byAge = lordRepository.findByAge(age);
                 for (Lord lord : byAge) {
                     result.add(lord);
